@@ -17,7 +17,7 @@ if (!isset($_GET['employee_id'])) {
 $employeeId = $_GET['employee_id'];
 
 // 2. Azure SQL Database 接続情報（ODBC）
-$server   = "sqlsrv-foremployeedb.database.windows.net";
+$server = "tcp:sqlsrv-foremployeedb.database.windows.net,1433";
 $database = "employeedb";
 $user     = "sqladmin";
 $password = "Test1997726!";
