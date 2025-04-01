@@ -4,7 +4,7 @@ header("Content-Type: application/json");
 // エラーログ出力を有効化（Azure Web App用）
 ini_set("log_errors", 1);
 ini_set("error_log", "/home/LogFiles/error_log");
-error_log("🔥 DB接続チェック開始（PDO_SQLSRV）");
+error_log("🔥 DB接続チェック開始");
 
 // 1. パラメータチェック（社員番号）
 if (!isset($_GET['employee_id'])) {
@@ -17,19 +17,19 @@ if (!isset($_GET['employee_id'])) {
 $employeeId = $_GET['employee_id'];
 
 // 2. Azure SQL Database 接続情報（PDO_SQLSRV）
-$server = "tcp:sqlsrv-foremployeedb.database.windows.net,1433";
+$server   = "tcp:sqlsrv-foremployeedb.database.windows.net,1433";
 $database = "employeedb";
 $user     = "sqladmin";
 $password = "Test1997726!";
 
-// DSN（PDO_SQLSRV 用）
-$dsn = "sqlsrv:server=$server;Database=$database";
+// PDO_SQLSRV DSN構成
+$dsn = "sqlsrv:Server=$server;Database=$database";
 
 try {
-    // 接続開始（PDO_SQLSRV）
+    // 接続開始
     $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    error_log("✅ DB接続成功（PDO_SQLSRV）");
+    error_log("✅ DB接続成功");
 
     // クエリ実行
     $stmt = $pdo->prepare("SELECT name FROM employee_data WHERE employee_id = ?");
@@ -44,7 +44,7 @@ try {
 
 } catch (PDOException $e) {
     // エラーログ出力
-    error_log("❌ DB接続エラー（PDO_SQLSRV）: " . $e->getMessage());
+    error_log("❌ DB接続エラー: " . $e->getMessage());
     echo json_encode([
         "success" => false,
         "message" => "SQL Serverへの接続に失敗しました"
