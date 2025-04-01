@@ -16,7 +16,7 @@ if (!isset($_GET['employee_id'])) {
 $employeeId = $_GET['employee_id'];
 
 // 2. Azure SQL DB 接続設定
-$server   = "tcp:sqlsrv-foremployeedb.database.windows.net"; // Azure SQL のFQDN
+$server   = "sqlsrv-foremployeedb.database.windows.net"; // Azure SQL のFQDN
 $database = "EmployeeDB";                                         // DB名
 $user     = "sqladmin";                                           // SQL認証のユーザー名
 $password = "Test1997726!";                                 // パスワード（.env管理でもOK）
