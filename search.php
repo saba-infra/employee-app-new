@@ -1,6 +1,10 @@
 <?php
 header("Content-Type: application/json");
 
+ini_set("log_errors", 1);
+ini_set("error_log", "/home/LogFiles/error_log"); // Azure Web App のログファイルへ
+error_log("🔥 DB接続チェック開始");
+
 // 1. 社員番号の取得チェック
 if (!isset($_GET['employee_id'])) {
     echo json_encode([
